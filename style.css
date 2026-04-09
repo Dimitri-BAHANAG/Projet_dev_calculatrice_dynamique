@@ -1,0 +1,51 @@
+/*
+ * Ajustements de style non directement réalisables avec les classes
+ * CSS Quasar intégrées ou pour des besoins de dimensions globaux.
+ */
+
+.calculator-wrapper {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 12px;
+}
+
+#display {
+    min-height: 80px;
+    word-wrap: break-word; /* Permet à un résultat long de passer à la ligne */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* Base de design pour nos boutons,
+   outre les couleurs et ombres qui viendront de Quasar CSS */
+.calc-btn {
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out, filter 0.1s;
+    user-select: none;
+}
+
+.calc-btn:hover {
+    filter: brightness(0.9);
+}
+
+.calc-btn:active {
+    transform: scale(0.95);
+}
+
+/* Texte en gras/majuscule pour les boutons d'actions */
+.uppercase {
+    text-transform: uppercase;
+}
+
+/*
+ * Correction potentielle pour s'assurer que sl-tooltip
+ * s'affiche de manière fluide par-dessus les éléments Quasar
+ */
+sl-tooltip {
+    display: block; /* Nécessaire pour que tooltip occupe tout l'espace d'une div parent */
+    width: 100%;
+}

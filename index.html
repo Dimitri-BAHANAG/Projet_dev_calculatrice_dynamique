@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice Monolithique</title>
+    <!-- Quasar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.15.0/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    
+    <!-- Shoelace Web Components -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+
+    <!-- Localbase -->
+    <script src="https://unpkg.com/localbase/dist/localbase.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-grey-2 flex flex-center window-height window-width">
+
+    <div class="calculator-wrapper bg-white shadow-10 q-pa-lg">
+        <!-- Zone d'affichage -->
+        <div id="display" class="bg-grey-9 text-white text-h4 q-pa-md q-mb-md text-right">
+            0
+        </div>
+
+        <div class="row q-col-gutter-sm">
+            <!-- Première Ligne : Outils (C, Sauver, Sync) -->
+            <div class="col-4">
+                <sl-tooltip content="Réinitialise l'opérande à zéro">
+                    <button class="calc-btn q-pa-md bg-red text-white text-bold full-width uppercase shadow-2" onclick="clearCalculator()">C (Effacer)</button>
+                </sl-tooltip>
+            </div>
+            <div class="col-4">
+                <sl-tooltip content="Sauvegarder la valeur lue dans IndexedDB">
+                    <button class="calc-btn q-pa-md bg-blue text-white text-bold full-width uppercase shadow-2" onclick="saveToDB()">Sauver</button>
+                </sl-tooltip>
+            </div>
+            <div class="col-4">
+                <sl-tooltip content="Remplacer la valeur par celle dans IndexedDB">
+                    <button class="calc-btn q-pa-md bg-green text-white text-bold full-width uppercase shadow-2" onclick="syncFromDB()">Sync</button>
+                </sl-tooltip>
+            </div>
+
+            <!-- Deuxième Ligne : 7, 8, 9, / -->
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('7')">7</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('8')">8</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('9')">9</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-orange text-white text-h6 full-width shadow-2" onclick="setOperator('/')">/</button></div>
+
+            <!-- Troisième Ligne : 4, 5, 6, * -->
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('4')">4</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('5')">5</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('6')">6</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-orange text-white text-h6 full-width shadow-2" onclick="setOperator('*')">*</button></div>
+
+            <!-- Quatrième Ligne : 1, 2, 3, - -->
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('1')">1</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('2')">2</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('3')">3</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-orange text-white text-h6 full-width shadow-2" onclick="setOperator('-')">-</button></div>
+
+            <!-- Cinquième Ligne : 0, ., =, + -->
+            <div class="col-6"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('0')">0</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-grey-3 text-dark text-h6 full-width shadow-1" onclick="appendDigit('.')">.</button></div>
+            <div class="col-3"><button class="calc-btn q-pa-md bg-orange text-white text-h6 full-width shadow-2" onclick="setOperator('+')">+</button></div>
+
+            <!-- Ligne de Calcul (=) -->
+            <div class="col-12 q-mt-sm"><button class="calc-btn q-pa-md bg-purple text-white text-h5 text-bold full-width shadow-3" onclick="calculate()">=</button></div>
+        </div>
+    </div>
+
+    <!-- Script de logique -->
+    <script src="script.js"></script>
+</body>
+</html>
