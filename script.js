@@ -7,7 +7,7 @@ let currentOperand = '';
 let previousOperand = '';
 let operator = null;
 
-// Accès à l'élément DOM d'affichage
+// Accès à l'élément DOM d'affichage, très important
 const displayElement = document.getElementById('display');
 
 /**
